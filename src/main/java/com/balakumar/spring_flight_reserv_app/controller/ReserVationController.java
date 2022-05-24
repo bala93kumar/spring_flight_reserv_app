@@ -1,8 +1,11 @@
 package com.balakumar.spring_flight_reserv_app.controller;
 
 
+import com.balakumar.spring_flight_reserv_app.dto.ReservationRequest;
 import com.balakumar.spring_flight_reserv_app.entities.Flight;
+import com.balakumar.spring_flight_reserv_app.entities.Reservation;
 import com.balakumar.spring_flight_reserv_app.repos.FlightRepo;
+import com.balakumar.spring_flight_reserv_app.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +21,9 @@ public class ReserVationController {
     @Autowired
     FlightRepo repo;
 
+    @Autowired
+    ReservationService  reservationService;
+
     @RequestMapping("/showCompleteReservation")
     public String  showCompleteReservation(@RequestParam("flightId") int flightid, ModelMap modelMap) {
 
@@ -30,9 +36,14 @@ public class ReserVationController {
     }
 
     @RequestMapping(value = "/completeReservation", method = RequestMethod.POST)
-    public String completeReservation() {
+    public String completeReservation(ReservationRequest request, ModelMap modelMap) {
 
-        return "flights/completeReservation";
+        Reservation reservation = reservationService.bookFlight(request);
+        modelMap.addAttribute("msg" ,"Rservation created successfully and id is " +
+                reservation.getId());
+
+
+        return "flights/reservationConfirmation";
     }
 
 

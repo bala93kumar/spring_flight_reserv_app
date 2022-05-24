@@ -9,10 +9,12 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Boolean checkedIn;
+
+    @Column(name="Number_of_bags", nullable = true)
     private int noOfBags;
 
     @OneToOne
-    private Passenger passender;
+    private Passenger passenger;
 
     @OneToOne
     private Flight flight;
@@ -41,12 +43,12 @@ public class Reservation {
         this.noOfBags = noOfBags;
     }
 
-    public Passenger getPassender() {
-        return passender;
+    public Passenger getPassenger() {
+        return passenger;
     }
 
-    public void setPassender(Passenger passender) {
-        this.passender = passender;
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
     }
 
     public Flight getFlight() {

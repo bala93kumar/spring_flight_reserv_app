@@ -17,6 +17,11 @@ public class UserControllers {
     @Autowired
     UserRepo userRepo;
 
+
+    @RequestMapping("/")
+    public String index() {
+        return  "index";
+    }
     @RequestMapping("/ShowReg")
     public String showRegistration() {
 
@@ -30,6 +35,12 @@ public class UserControllers {
 
         return "login/login";
 
+    }
+
+    @RequestMapping("/ShowLoginPage")
+    public String ShowLoginPage() {
+
+        return "login/login";
     }
 
     @RequestMapping( "/login")
